@@ -4,6 +4,10 @@ namespace SmartAgency.Data.Entities.User;
 
 public record User(Name FirstName, Name LastName, Email Email, DateOnly AddedDate); 
 
+
+
+
+
 //comparer i toString
 
 // copy/ clone
