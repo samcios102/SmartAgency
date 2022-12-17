@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SmartAgency.Data.Entities.User.ValueObjects;
+namespace SmartAgency.Data.Entities.ValueObjects;
 
 public record Email
 {
@@ -27,11 +27,11 @@ public record Email
     // nie trzeba var new Name(name)
 
     public static implicit operator Email(string value) // z prymitywu na value object // tak naprawde to jest kontruktor taki
-        => new (value);
+        => new(value);
 
     public static implicit operator string(Email email) // z value na prymityw
         => email.Value;
 
 
-    
+
 }
