@@ -1,6 +1,6 @@
 ﻿namespace SmartAgency.Data.Entities;
 
-public abstract class EntityBase : IEntity
+public abstract record EntityBase(Guid Id) : IEntity
 {
-    public int Id { get; set; }
+
 }

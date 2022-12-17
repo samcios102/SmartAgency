@@ -1,4 +1,4 @@
-﻿namespace SmartAgency.Data.Entities.User.ValueObjects;
+﻿namespace SmartAgency.Data.Entities.ValueObjects;
 
 
 public record Name
