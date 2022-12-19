@@ -1,5 +1,8 @@
 ﻿namespace SmartAgency;
 
-internal interface IApp
+public interface IApp
 {
+    {
+        void Run();
+    }
 }

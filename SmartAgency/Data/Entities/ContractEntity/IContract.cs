@@ -8,8 +8,8 @@ namespace SmartAgency.Data.Entities.ContractEntity
 {
     public interface IContract : IEntity
     { 
-        public DateOnly ExpiryDate { get; init; }
-        public int Commission { get; init; }
+        DateOnly ExpiryDate { get; init; }
+        int Commission { get; init; }
 
 
     }

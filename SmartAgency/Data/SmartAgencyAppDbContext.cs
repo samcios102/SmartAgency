@@ -1,5 +1,8 @@
-﻿namespace SmartAgency.Data;
+﻿using Microsoft.EntityFrameworkCore;
 
-public class SmartAgencyAppDbContext
+namespace SmartAgency.Data;
+
+public class SmartAgencyAppDbContext : DbContext
 {
+
 }
