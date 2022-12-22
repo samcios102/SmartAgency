@@ -9,7 +9,7 @@ public class ListRepository<T> : IRepository<T> where T : class, IEntity
 {
     protected readonly List<T> _itemList = new List<T>();
 
-    public T Get(Guid id)
+    public T GetById(Guid id)
     {
         return _itemList.SingleOrDefault(x => x.Id == id);
     }

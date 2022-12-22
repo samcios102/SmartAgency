@@ -2,14 +2,14 @@
 
 public class App : IApp
 {
-    private readonly
+    //private readonly
 
 
 
 
         public void Run()
     {
-
+        Console.WriteLine("Im in Run App");
     }
 
 

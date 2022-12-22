@@ -1,7 +1,12 @@
-﻿namespace SmartAgency;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public interface IApp
+namespace SmartAgency
 {
+    public interface IApp
     {
         void Run();
     }
