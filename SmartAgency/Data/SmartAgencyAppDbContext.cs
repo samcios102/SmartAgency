@@ -18,6 +18,8 @@ public class SmartAgencyAppDbContext : DbContext
     public DbSet<Client> Clients => Set<Client>();
     //public DbSet<Localisation> Localisations => Set<Localisation>();
 
+    ///// public DbSet<Property> Properties { get; set; } /// ms sql
+
 
     /*public SmartAgencyAppDbContext(DbContextOptions<SmartAgencyAppDbContext> options)
         :base(options)
@@ -92,5 +94,12 @@ public class SmartAgencyAppDbContext : DbContext
                
 
         base.ConfigureConventions(configurationBuilder);
+    }*/
+
+    //// MS SQL
+    /*public SmartAgencyAppDbContext(DbContextOptions<SmartAgencyAppDbContext> options)
+        :base(options)
+    {
+
     }*/
 }

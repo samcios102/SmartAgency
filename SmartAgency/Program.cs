@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Reflection.Metadata;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SmartAgency;
+using SmartAgency.Components.CsvReader;
 using SmartAgency.Data;
 using SmartAgency.Data.Entities.ContractEntity;
 using SmartAgency.Data.Entities.Enums;
@@ -18,8 +20,15 @@ using SmartAgency.Data.Repositories;
 var services = new ServiceCollection();
 services.AddSingleton<IApp, App>();
 services.AddSingleton<IRepository<Property>, ListRepository<Property>>();
-services.AddSingleton<IRepository<Client>, ListRepository<Client>>(); 
-//services.AddSingleton<IRepository<Client>, ListRepository<Client>>();
+services.AddSingleton<IRepository<Client>, SqlRepository<Client>>();
+services.AddSingleton<ICsvReader, CsvReader>();
+//services.AddSingleton<IRepository<Client>, ListRepository<SellContracts>>();
+
+services.AddSingleton<DbContext, SmartAgencyAppDbContext>();
+
+/*services.AddDbContext<SmartAgencyAppDbContext>(options => options
+    .UseSqlServer("Data Source=SAMUEL-MAIN\\SQLEXPRESS02;Initial Catalog=SmartAgencyStorage;Integrated Security=True;TrustServerCertificate=True"));*/
+
 
 //services.AddDbContext<SmartAgencyAppDbContext>(); // nie wiem czy potrzebne
 
@@ -39,16 +48,14 @@ app.Run();
 
 
 /*
-var client1 = new Client(Guid.NewGuid(), "Samczi", "Piwnica", "sam@saczi.pl", DateOnly.Parse("1996-3-14"));
-var client2 = new Client(Guid.NewGuid(), "Naczi", "Wingorono", "nacz@naczi.pl", DateOnly.Parse("1997-4-15"));
+
 */
 
 var agent1 = new Agent(Guid.NewGuid(), "samuel", "piwnicki", "sam@samn.pl", DateOnly.FromDateTime(DateTime.Now) , new List<Client>());
 
-var property1 = new Property(123, new Localisation(LocalisationDistrict.Wilanow, "Wilanowska", null, null), 2, 50,
-    TechnicalCondition.ToMoveIn);
 
-var contract1 = new SellContract(Guid.NewGuid(), DateOnly.FromDateTime(DateTime.Now), 2, property1);
+
+//var contract1 = new SellContract(Guid.NewGuid(), DateOnly.FromDateTime(DateTime.Now), 2, property1);
 
 
 
@@ -78,7 +85,7 @@ var arrayLocalisation1 = stringLocalisation1.Split(',');
 
 
 
-var sqlPropertyRepository = new SqlRepository<Property>(new SmartAgencyAppDbContext());
+/*var sqlPropertyRepository = new SqlRepository<Property>(new SmartAgencyAppDbContext());
 sqlPropertyRepository.Add(property1);
 sqlPropertyRepository.Add(property1 with{ Id = Guid.NewGuid()});
 sqlPropertyRepository.Save();
@@ -86,7 +93,10 @@ sqlPropertyRepository.Save();
 foreach (var property in sqlPropertyRepository.GetAll())
 {
     Console.WriteLine(property);
-}
+}*/
+
+
+
 
 
 

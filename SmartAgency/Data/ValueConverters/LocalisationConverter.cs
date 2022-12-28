@@ -9,7 +9,7 @@ using SmartAgency.Data.Entities.ValueObjects;
 
 namespace SmartAgency.Data.ValueConverters
 {
-    public class LocalisationConverter : ValueConverter<Localisation, string>
+    /*public class LocalisationConverter : ValueConverter<Localisation, string>
     {
 
         public LocalisationConverter()
@@ -21,5 +21,5 @@ namespace SmartAgency.Data.ValueConverters
 
 
 
-    }
+    }*/
 }
