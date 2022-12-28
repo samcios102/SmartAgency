@@ -2,14 +2,15 @@
 
 namespace SmartAgency.Data.Entities.UserEntity;
 
-public abstract record User(Guid Id, Name FirstName, Name LastName, Email Email, DateOnly DateAdded) : EntityBase(Id)
+public abstract record User : IEntity
 {
-    /*
-    public Name FirstName;
-    public Name LastName;
-    public Email Email;
-    public DateOnly DateAdded;
-    */
+    public Guid Id { get; init; }
+    public Name FirstName { get; set; }
+    public Name LastName { get; set; }
+    public Email Email { get; set; }
+    public DateOnly DateAdded { get; set; }
+
+    public User(){}
 
 }
 

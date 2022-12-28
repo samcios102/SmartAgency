@@ -1,6 +1,9 @@
-﻿namespace SmartAgency.Data.Repositories;
+﻿using SmartAgency.Data.Entities;
 
-public interface IRepository
+namespace SmartAgency.Data.Repositories;
+
+public interface IRepository<T> : IReadRepository<T>, IWriteRepository<T>
+    where T : class, IEntity
 {
     
 }

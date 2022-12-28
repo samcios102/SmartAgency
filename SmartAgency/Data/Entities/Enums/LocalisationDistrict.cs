@@ -2,5 +2,5 @@
 
 public enum LocalisationDistrict
 {
-    Wilanow, Mokotow, Ursynow, Wola, Bemowo, Wlochy, Ochota, Srodmiescie, PragaPld
+    Wilanow, Mokotow, Ursynow, Wola, Wlochy, Ochota, Srodmiescie, PragaPld
 }

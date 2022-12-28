@@ -4,4 +4,4 @@ using SmartAgency.Data.Entities.ValueObjects;
 namespace SmartAgency.Data.Entities.UserEntity.AgentEntity;
 
 public record Agent(Guid Id, Name FirstName, Name LastName, Email Email, DateOnly DateAdded, List<Client>? ClientList)
-    : User(Id, FirstName, LastName, Email, DateAdded);
+    : User/*(Id, FirstName, LastName, Email, DateAdded)*/;
