@@ -18,6 +18,10 @@ using SmartAgency.Data.Repositories;
 var services = new ServiceCollection();
 services.AddSingleton<IApp, App>();
 services.AddSingleton<IRepository<Property>, ListRepository<Property>>();
+services.AddSingleton<IRepository<Client>, ListRepository<Client>>(); 
+//services.AddSingleton<IRepository<Client>, ListRepository<Client>>();
+
+//services.AddDbContext<SmartAgencyAppDbContext>(); // nie wiem czy potrzebne
 
 
 var serviceProvider = services.BuildServiceProvider();
@@ -34,8 +38,10 @@ app.Run();
 
 
 
+/*
 var client1 = new Client(Guid.NewGuid(), "Samczi", "Piwnica", "sam@saczi.pl", DateOnly.Parse("1996-3-14"));
 var client2 = new Client(Guid.NewGuid(), "Naczi", "Wingorono", "nacz@naczi.pl", DateOnly.Parse("1997-4-15"));
+*/
 
 var agent1 = new Agent(Guid.NewGuid(), "samuel", "piwnicki", "sam@samn.pl", DateOnly.FromDateTime(DateTime.Now) , new List<Client>());
 
@@ -46,6 +52,7 @@ var contract1 = new SellContract(Guid.NewGuid(), DateOnly.FromDateTime(DateTime.
 
 
 
+/*
 var clientRepository = new ListRepository<Client>();
 
 clientRepository.Add(client1);
@@ -53,7 +60,7 @@ clientRepository.Add(client2);
 clientRepository.Remove(client2.Id);
 
 
-clientRepository.Save();
+clientRepository.Save();*/
 
 var sqlRepository = new SqlRepository<Client>(new SmartAgencyAppDbContext());
 //sqlRepository.Add(client1);

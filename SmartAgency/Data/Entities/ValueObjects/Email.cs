@@ -1,12 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace SmartAgency.Data.Entities.ValueObjects;
 
 public record Email
 {
 
-    public string Value { get; }
+    public string Value { get; set; }
 
+/*    public Email()
+    {
+        Value = "";
+    }*/
     public Email(string value)
     {
         if (string.IsNullOrEmpty(value))
@@ -24,12 +29,11 @@ public record Email
         Value = value;
     }
 
-    // nie trzeba var new Name(name)
 
-    public static implicit operator Email(string value) // z prymitywu na value object // tak naprawde to jest kontruktor taki
+    public static implicit operator Email(string value) 
         => new(value);
 
-    public static implicit operator string(Email email) // z value na prymityw
+    public static implicit operator string(Email email)
         => email.Value;
 
 

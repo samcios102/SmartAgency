@@ -15,7 +15,8 @@ public class SmartAgencyAppDbContext : DbContext
     //public DbSet<Agent> Agents => Set<Agent>();
     //public DbSet<SellContract> SellContracts => Set<SellContract>();
     public DbSet<Property> Properties => Set<Property>();
-    public DbSet<Localisation> Localisations => Set<Localisation>();
+    public DbSet<Client> Clients => Set<Client>();
+    //public DbSet<Localisation> Localisations => Set<Localisation>();
 
 
     /*public SmartAgencyAppDbContext(DbContextOptions<SmartAgencyAppDbContext> options)
@@ -74,13 +75,22 @@ public class SmartAgencyAppDbContext : DbContext
         /// dziala jesli ten dolny sie usunie, bo jak sa dwa na raz to cos sie pierdoli, ale to naprawiaja podobno
         /*modelBuilder.Entity<Property>().OwnsOne(x => x.Localisation);*/
 
+        modelBuilder.Entity<Property>().OwnsOne(x => x.Localisation);
+        modelBuilder.Entity<Client>().OwnsOne(x => x.Email);
+        modelBuilder.Entity<Client>().OwnsOne(x => x.FirstName);
+        modelBuilder.Entity<Client>().OwnsOne(x => x.LastName);
+
+
         base.OnModelCreating(modelBuilder);
     }
 
-    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    // nie jest potrzebne wraz z klasa localisation converter
+/*    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
-        configurationBuilder.Properties<Localisation>().HaveConversion<LocalisationConverter>();
+
+        //configurationBuilder.Properties<Localisation>().HaveConversion<LocalisationConverter>();
+               
 
         base.ConfigureConventions(configurationBuilder);
-    }
+    }*/
 }

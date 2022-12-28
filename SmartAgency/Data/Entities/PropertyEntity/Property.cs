@@ -29,6 +29,11 @@ public record Property : IEntity
         Id = Guid.NewGuid();
     }
 
+    public Property()
+    {
+
+    }
+
     /*public override string ToString()
     {
         return v => v string.Join(", ", v);
