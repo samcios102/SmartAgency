@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SmartAgency;
 using SmartAgency.Components.CsvReader;
+using SmartAgency.Components.DataProviders;
 using SmartAgency.Data;
 using SmartAgency.Data.Entities.ContractEntity;
 using SmartAgency.Data.Entities.Enums;
@@ -22,6 +23,7 @@ services.AddSingleton<IApp, App>();
 services.AddSingleton<IRepository<Property>, ListRepository<Property>>();
 services.AddSingleton<IRepository<Client>, SqlRepository<Client>>();
 services.AddSingleton<ICsvReader, CsvReader>();
+services.AddSingleton<IClientProvider, ClientProvider>();
 //services.AddSingleton<IRepository<Client>, ListRepository<SellContracts>>();
 
 services.AddSingleton<DbContext, SmartAgencyAppDbContext>();
