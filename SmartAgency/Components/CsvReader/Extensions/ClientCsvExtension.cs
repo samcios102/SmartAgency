@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SmartAgency.Components.CsvReader.Models;
+using SmartAgency.Data.Entities.UserEntity.ClientEntity;
 
 namespace SmartAgency.Components.CsvReader.Extensions
 {
-    public static class ClientExtension
+    public static class ClientCsvExtension
     {
-        public static IEnumerable<ClientCSV> ToClient(this IEnumerable<string> source)
+        public static IEnumerable<ClientCSV> ToClientsCsv(this IEnumerable<string> source)
         {
             return source.Select(line => line.Split(',')).Select(columns => new ClientCSV
                 {
@@ -21,5 +22,19 @@ namespace SmartAgency.Components.CsvReader.Extensions
                 }
             );
         }
+
+        public static Client ToClient(this ClientCSV clientCsv)
+        {
+            return new Client
+            {
+                Id = clientCsv.Id,
+                FirstName = clientCsv.FirstName,
+                LastName = clientCsv.LastName,
+                Email = clientCsv.Email,
+                DateAdded = clientCsv.DateAdded
+            };
+
+        }
+
     }
 }

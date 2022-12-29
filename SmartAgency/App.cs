@@ -5,6 +5,7 @@ using SmartAgency.Data.Entities.UserEntity.ClientEntity;
 using SmartAgency.Data.Entities.ValueObjects;
 using SmartAgency.Data.Repositories;
 using System.Formats.Asn1;
+using SmartAgency.Components.CsvReader.Extensions;
 using SmartAgency.Components.DataProviders;
 
 namespace SmartAgency;
@@ -44,25 +45,45 @@ public class App : IApp
 
         var client1 = new Client(Guid.Parse("a22eff26-2098-4949-88c8-6db38a7125fa"), "Samczi", "Piwnica", "sam@saczi.pl", DateOnly.Parse("1996-3-14"));
         var client2 = new Client(Guid.NewGuid(), "Naczi", "Wingorono", "nacz@naczi.pl", DateOnly.Parse("1997-4-15"));
+        var client3 = new Client(Guid.NewGuid(), "Bamto", "Kaskada", "Kaszki@d.pl", DateOnly.Parse("1997-4-15"));
+
+        var csvClients = _csvReader.ProcessClients("Resources\\Files\\ClientExample.csv");
+
+        foreach (var csvClient in csvClients)
+        {
+            var entityClient = csvClient.ToClient();
+            _clientRepository.Add(entityClient);
+        }
+
 
         _clientRepository.Add(client1);
         _clientRepository.Add(client2);
+        _clientRepository.Add(client3);
         _clientRepository.Save();
 
-        foreach (var client in _clientRepository.GetAll())               
-        {
-            Console.WriteLine(client);
-        }
 
-        var csvClients = _csvReader.ProcessClients("Resources\\Files\\ClientExample.csv");
+
+        
 
 
 
         //_clientProvider.SearchClients("a22eff26-2098-4949-88c8-6db38a7125fa");
         _clientProvider.SearchClients("1997-4-15");
 
+        var sortedClients = _clientProvider.SortClientByDateAdded(false);
+
+        var filteredClients = _clientProvider.FilterClientsAddedAfterDate(DateOnly.Parse("1996-12-12"));
 
 
+        var searchedClient = _clientProvider.SearchClients("Myriam");
+
+        var basicColumnClients = _clientProvider.ShowBasicColumn();
+
+        var pagedClients = _clientProvider.ShowPage(4);
+
+
+
+        Console.WriteLine();
 
 
 

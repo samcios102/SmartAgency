@@ -4,12 +4,15 @@ namespace SmartAgency.Components.DataProviders;
 
 public interface IClientProvider
 {
-    List<Client> ShowClients();
     List<Client> SearchClients(string searchValue);
 
-    List<Client> SortClients(int chooseOption);
+    List<Client> SortClientByDateAdded (bool ascending);
 
-    List<Client> FilterClients();
+    List<Client> FilterClientsAddedAfterDate(DateOnly date);
 
-    List<Client> GetSpecificColumns(int chooseOption);
+    List<Client> ShowBasicColumn();
+
+    List<Client> ShowPage(int pageNr);
+
+
 }

@@ -15,7 +15,7 @@ public class CsvReader : ICsvReader
         var clients = File.ReadAllLines(filePath)
             .Skip(1)
             .Where(x => x.Length > 1)
-            .ToClient();
+            .ToClientsCsv();
 
         return clients.ToList();
     }

@@ -18,10 +18,6 @@ namespace SmartAgency.Components.DataProviders
             _clientRepository = clientRepository;
         }
 
-        public List<Client> ShowClients()
-        {
-            return _clientRepository.GetAll().ToList();
-        }
 
         public List<Client> SearchClients(string searchValue)
         {
@@ -41,19 +37,62 @@ namespace SmartAgency.Components.DataProviders
             return clients.ToList();
         }
 
-        public List<Client> SortClients(int chooseOption)
+        public List<Client> SortClientByDateAdded(bool ascending)
         {
-            throw new NotImplementedException();
+            var clients = _clientRepository.GetAll();
+
+            if (ascending)
+            {
+                return clients.OrderBy(x => x.DateAdded)
+                    .ThenBy(x => x.LastName.Value)
+                    .ToList();
+            }
+            else
+            {
+                return clients.OrderByDescending(x => x.DateAdded)
+                    .ThenBy(x => x.LastName.Value)
+                    .ToList();
+            }
+                
+            
         }
 
-        public List<Client> FilterClients()
+        public List<Client> FilterClientsAddedAfterDate(DateOnly date)
         {
-            throw new NotImplementedException();
+
+            var clients = _clientRepository.GetAll()
+                .Where(x => x.DateAdded > date);
+
+
+            return clients.ToList();
         }
 
-        public List<Client> GetSpecificColumns(int chooseOption)
+        public List<Client> ShowBasicColumn()
         {
-            throw new NotImplementedException();
+            var clients = _clientRepository.GetAll()
+                .Select(x => new Client
+                {
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    DateAdded = x.DateAdded
+                });
+            return clients.ToList();
+        }
+
+        public List<Client> ShowPage(int pageNr)
+        {
+            var clients = _clientRepository.GetAll()
+                .OrderByDescending(x => x.DateAdded)
+                .Skip((pageNr - 1) * 20)
+                .Take(20);
+
+            if (!clients.Any())
+            {
+                throw new ArgumentException("Page not found");
+            }
+
+
+            return clients.ToList();
         }
     }
 }

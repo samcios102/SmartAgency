@@ -36,6 +36,9 @@ public record Email
     public static implicit operator string(Email email)
         => email.Value;
 
-
+    public override string ToString()
+    {
+        return Value;
+    }
 
 }

@@ -27,5 +27,8 @@ public class Name
     public static implicit operator string(Name name)
         => name.Value;
 
-
+    public override string ToString()
+    {
+        return Value;
+    }
 }
