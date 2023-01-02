@@ -1,7 +1,6 @@
-﻿using SmartAgency.Data.Entities.ContractEntity;
-using SmartAgency.Data.Entities.ValueObjects;
+﻿using SmartAgency._1_DataAccess.Data.Entities.ValueObjects;
 
-namespace SmartAgency.Data.Entities.UserEntity.ClientEntity;
+namespace SmartAgency._1_DataAccess.Data.Entities.UserEntity.ClientEntity;
 
 public record Client : User
 {

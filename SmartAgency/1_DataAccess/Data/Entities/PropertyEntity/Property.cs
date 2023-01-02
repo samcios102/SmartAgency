@@ -1,8 +1,7 @@
-﻿using SmartAgency.Data.Entities.ContractEntity;
-using SmartAgency.Data.Entities.Enums;
-using SmartAgency.Data.Entities.ValueObjects;
+﻿using SmartAgency._1_DataAccess.Data.Entities.Enums;
+using SmartAgency._1_DataAccess.Data.Entities.ValueObjects;
 
-namespace SmartAgency.Data.Entities.PropertyEntity;
+namespace SmartAgency._1_DataAccess.Data.Entities.PropertyEntity;
 
 public record Property : IEntity
 {

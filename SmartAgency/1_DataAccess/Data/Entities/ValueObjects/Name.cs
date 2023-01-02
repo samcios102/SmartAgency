@@ -1,4 +1,4 @@
-﻿namespace SmartAgency.Data.Entities.ValueObjects;
+﻿namespace SmartAgency._1_DataAccess.Data.Entities.ValueObjects;
 
 
 public class Name

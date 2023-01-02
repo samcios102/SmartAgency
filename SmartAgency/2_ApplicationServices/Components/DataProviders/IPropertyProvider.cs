@@ -1,6 +1,4 @@
-﻿using SmartAgency.Data.Entities.PropertyEntity;
-
-namespace SmartAgency.Components.DataProviders;
+﻿namespace SmartAgency._2_ApplicationServices.Components.DataProviders;
 
 public interface IPropertyProvider
 {

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SmartAgency.Components.CsvReader.Models;
-using SmartAgency.Data.Entities.UserEntity.ClientEntity;
+﻿using SmartAgency._1_DataAccess.Data.Entities.UserEntity.ClientEntity;
+using SmartAgency._2_ApplicationServices.Components.CsvReader.Models;
 
-namespace SmartAgency.Components.CsvReader.Extensions
+namespace SmartAgency._2_ApplicationServices.Components.CsvReader.Extensions
 {
     public static class ClientCsvExtension
     {

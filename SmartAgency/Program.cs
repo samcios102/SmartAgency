@@ -4,17 +4,16 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SmartAgency;
-using SmartAgency.Components.CsvReader;
-using SmartAgency.Components.DataProviders;
-using SmartAgency.Data;
-using SmartAgency.Data.Entities.ContractEntity;
-using SmartAgency.Data.Entities.Enums;
-using SmartAgency.Data.Entities.PropertyEntity;
-using SmartAgency.Data.Entities.UserEntity;
-using SmartAgency.Data.Entities.UserEntity.AgentEntity;
-using SmartAgency.Data.Entities.UserEntity.ClientEntity;
-using SmartAgency.Data.Entities.ValueObjects;
-using SmartAgency.Data.Repositories;
+using SmartAgency._1_DataAccess.Data;
+using SmartAgency._1_DataAccess.Data.Entities.Enums;
+using SmartAgency._1_DataAccess.Data.Entities.PropertyEntity;
+using SmartAgency._1_DataAccess.Data.Entities.UserEntity.AgentEntity;
+using SmartAgency._1_DataAccess.Data.Entities.UserEntity.ClientEntity;
+using SmartAgency._1_DataAccess.Data.Entities.ValueObjects;
+using SmartAgency._1_DataAccess.Data.Repositories;
+using SmartAgency._2_ApplicationServices.Components.CsvReader;
+using SmartAgency._2_ApplicationServices.Components.DataProviders;
+using SmartAgency._3_UI;
 
 
 var services = new ServiceCollection();

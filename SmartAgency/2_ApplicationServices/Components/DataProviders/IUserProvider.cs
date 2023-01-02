@@ -1,8 +1,6 @@
-﻿using SmartAgency.Data.Entities.UserEntity;
-using SmartAgency.Data.Entities.UserEntity.ClientEntity;
-using User = SmartAgency.Data.Entities.UserEntity.User;
+﻿using User = SmartAgency._1_DataAccess.Data.Entities.UserEntity.User;
 
-namespace SmartAgency.Components.DataProviders;
+namespace SmartAgency._2_ApplicationServices.Components.DataProviders;
 
 public interface IUserProvider<TUser> where TUser : User
 {

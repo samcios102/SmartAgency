@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SmartAgency.Data.Entities.UserEntity;
-using SmartAgency.Data.Entities.UserEntity.ClientEntity;
-using SmartAgency.Data.Repositories;
+﻿using SmartAgency._1_DataAccess.Data.Entities.UserEntity;
+using SmartAgency._1_DataAccess.Data.Repositories;
 
-namespace SmartAgency.Components.DataProviders
+namespace SmartAgency._2_ApplicationServices.Components.DataProviders
 {
     public class UserProvider<TUser> : IUserProvider<TUser> where TUser : User, new()
     {

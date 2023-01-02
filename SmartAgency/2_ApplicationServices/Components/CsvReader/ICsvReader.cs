@@ -1,7 +1,6 @@
-﻿using SmartAgency.Data.Entities.PropertyEntity;
-using ClientCSV = SmartAgency.Components.CsvReader.Models.ClientCSV;
+﻿using ClientCSV = SmartAgency._2_ApplicationServices.Components.CsvReader.Models.ClientCSV;
 
-namespace SmartAgency.Components.CsvReader;
+namespace SmartAgency._2_ApplicationServices.Components.CsvReader;
 
 public interface ICsvReader
 {

@@ -1,13 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SmartAgency.Data.Entities.ContractEntity;
-using SmartAgency.Data.Entities.PropertyEntity;
-using SmartAgency.Data.Entities.UserEntity.AgentEntity;
-using SmartAgency.Data.Entities.UserEntity.ClientEntity;
-using System.Diagnostics.Contracts;
-using SmartAgency.Data.Entities.ValueObjects;
-using SmartAgency.Data.ValueConverters;
+using SmartAgency._1_DataAccess.Data.Entities.PropertyEntity;
+using SmartAgency._1_DataAccess.Data.Entities.UserEntity.ClientEntity;
 
-namespace SmartAgency.Data;
+namespace SmartAgency._1_DataAccess.Data;
 
 public class SmartAgencyAppDbContext : DbContext
 {

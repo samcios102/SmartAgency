@@ -1,6 +1,6 @@
-﻿using SmartAgency.Data.Entities.ValueObjects;
+﻿using SmartAgency._1_DataAccess.Data.Entities.ValueObjects;
 
-namespace SmartAgency.Data.Entities.UserEntity;
+namespace SmartAgency._1_DataAccess.Data.Entities.UserEntity;
 
 public abstract record User : IEntity
 {

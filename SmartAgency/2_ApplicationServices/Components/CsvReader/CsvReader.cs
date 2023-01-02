@@ -1,7 +1,7 @@
-﻿using SmartAgency.Components.CsvReader.Extensions;
-using SmartAgency.Components.CsvReader.Models;
+﻿using SmartAgency._2_ApplicationServices.Components.CsvReader.Extensions;
+using SmartAgency._2_ApplicationServices.Components.CsvReader.Models;
 
-namespace SmartAgency.Components.CsvReader;
+namespace SmartAgency._2_ApplicationServices.Components.CsvReader;
 
 public class CsvReader : ICsvReader
 {

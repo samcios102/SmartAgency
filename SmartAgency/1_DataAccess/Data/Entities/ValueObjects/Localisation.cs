@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SmartAgency.Data.Entities.Enums;
+﻿using SmartAgency._1_DataAccess.Data.Entities.Enums;
 
-namespace SmartAgency.Data.Entities.ValueObjects;
+namespace SmartAgency._1_DataAccess.Data.Entities.ValueObjects;
 public class Localisation 
 {
     public LocalisationDistrict District { get; set; }

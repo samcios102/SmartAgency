@@ -1,4 +1,4 @@
-﻿namespace SmartAgency.Components.DataProviders.Extensions;
+﻿namespace SmartAgency._2_ApplicationServices.Components.DataProviders.Extensions;
 
 internal class PropertyHelper
 {

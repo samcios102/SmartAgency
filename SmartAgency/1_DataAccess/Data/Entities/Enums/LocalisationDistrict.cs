@@ -1,4 +1,4 @@
-﻿namespace SmartAgency.Data.Entities.Enums;
+﻿namespace SmartAgency._1_DataAccess.Data.Entities.Enums;
 
 public enum LocalisationDistrict
 {

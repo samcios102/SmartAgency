@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SmartAgency.Data.Entities;
+using SmartAgency._1_DataAccess.Data.Entities;
 
-namespace SmartAgency.Data.Repositories;
+namespace SmartAgency._1_DataAccess.Data.Repositories;
 
 public class SqlRepository<T> : IRepository<T> where T : class, IEntity
 {

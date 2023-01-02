@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartAgency.Data.Entities.ContractEntity
+﻿namespace SmartAgency._1_DataAccess.Data.Entities.ContractEntity
 {
     public class BuyContract
     {

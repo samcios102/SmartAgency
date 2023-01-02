@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartAgency.Data.Entities.Enums
+﻿namespace SmartAgency._1_DataAccess.Data.Entities.Enums
 {
     public enum TechnicalCondition
     {

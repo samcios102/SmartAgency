@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Reflection;
-using SmartAgency.Data.Entities;
-using SmartAgency.Data.Entities.UserEntity.ClientEntity;
+﻿using SmartAgency._1_DataAccess.Data.Entities;
 
-namespace SmartAgency.Data.Repositories;
+namespace SmartAgency._1_DataAccess.Data.Repositories;
 
 public class ListRepository<T> : IRepository<T> where T : class, IEntity
 {

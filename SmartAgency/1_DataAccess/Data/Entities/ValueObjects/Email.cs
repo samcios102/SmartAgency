@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 
-namespace SmartAgency.Data.Entities.ValueObjects;
+namespace SmartAgency._1_DataAccess.Data.Entities.ValueObjects;
 
 public record Email
 {

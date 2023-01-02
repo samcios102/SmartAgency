@@ -1,6 +1,6 @@
-﻿using SmartAgency.Data.Entities;
+﻿using SmartAgency._1_DataAccess.Data.Entities;
 
-namespace SmartAgency.Data.Repositories;
+namespace SmartAgency._1_DataAccess.Data.Repositories;
 
 public interface IWriteRepository<in T> where T : class, IEntity
 {
