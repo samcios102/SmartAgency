@@ -4,27 +4,28 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SmartAgency.Data.Entities.UserEntity;
 using SmartAgency.Data.Entities.UserEntity.ClientEntity;
 using SmartAgency.Data.Repositories;
 
 namespace SmartAgency.Components.DataProviders
 {
-    public class ClientProvider : IClientProvider
+    public class UserProvider<TUser> : IUserProvider<TUser> where TUser : User, new()
     {
-        private readonly IRepository<Client> _clientRepository;
+        private readonly IRepository<TUser> _userRepository;
 
-        public ClientProvider(IRepository<Client> clientRepository)
+        public UserProvider(IRepository<TUser> userRepository)
         {
-            _clientRepository = clientRepository;
+            _userRepository = userRepository;
         }
 
 
-        public List<Client> SearchClients(string searchValue)
+        public List<TUser> Search(string searchValue)
         {
             var guidTryParsed = Guid.TryParse(searchValue, out var newGuid);
             var dateOnlyTryParsed = DateOnly.TryParse(searchValue, out var newDateOnly);
 
-            var clients = _clientRepository.GetAll()
+            var users = _userRepository.GetAll()
                 .Where(x => 
                     x.Id.Equals(newGuid) ||
                     x.FirstName.Value.Equals(searchValue, StringComparison.InvariantCultureIgnoreCase) || 
@@ -34,22 +35,22 @@ namespace SmartAgency.Components.DataProviders
                     );
 
 
-            return clients.ToList();
+            return users.ToList();
         }
 
-        public List<Client> SortClientByDateAdded(bool ascending)
+        public List<TUser> SortByDateAdded(bool ascending)
         {
-            var clients = _clientRepository.GetAll();
+            var users = _userRepository.GetAll();
 
             if (ascending)
             {
-                return clients.OrderBy(x => x.DateAdded)
+                return users.OrderBy(x => x.DateAdded)
                     .ThenBy(x => x.LastName.Value)
                     .ToList();
             }
             else
             {
-                return clients.OrderByDescending(x => x.DateAdded)
+                return users.OrderByDescending(x => x.DateAdded)
                     .ThenBy(x => x.LastName.Value)
                     .ToList();
             }
@@ -57,42 +58,42 @@ namespace SmartAgency.Components.DataProviders
             
         }
 
-        public List<Client> FilterClientsAddedAfterDate(DateOnly date)
+        public List<TUser> FilterAddedAfterDate(DateOnly date)
         {
 
-            var clients = _clientRepository.GetAll()
+            var users = _userRepository.GetAll()
                 .Where(x => x.DateAdded > date);
 
 
-            return clients.ToList();
+            return users.ToList();
         }
 
-        public List<Client> ShowBasicColumn()
+        public List<TUser> ShowBasicColumn()
         {
-            var clients = _clientRepository.GetAll()
-                .Select(x => new Client
+            var users = _userRepository.GetAll()
+                .Select(x => new TUser
                 {
                     FirstName = x.FirstName,
                     LastName = x.LastName,
                     DateAdded = x.DateAdded
                 });
-            return clients.ToList();
+            return users.ToList();
         }
 
-        public List<Client> ShowPage(int pageNr)
+        public List<TUser> ShowPage(int pageNr)
         {
-            var clients = _clientRepository.GetAll()
+            var users = _userRepository.GetAll()
                 .OrderByDescending(x => x.DateAdded)
                 .Skip((pageNr - 1) * 20)
                 .Take(20);
 
-            if (!clients.Any())
+            if (!users.Any())
             {
                 throw new ArgumentException("Page not found");
             }
 
 
-            return clients.ToList();
+            return users.ToList();
         }
     }
 }

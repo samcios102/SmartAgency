@@ -17,13 +17,12 @@ using SmartAgency.Data.Entities.ValueObjects;
 using SmartAgency.Data.Repositories;
 
 
-
 var services = new ServiceCollection();
 services.AddSingleton<IApp, App>();
 services.AddSingleton<IRepository<Property>, ListRepository<Property>>();
 services.AddSingleton<IRepository<Client>, SqlRepository<Client>>();
 services.AddSingleton<ICsvReader, CsvReader>();
-services.AddSingleton<IClientProvider, ClientProvider>();
+services.AddSingleton<IUserProvider<Client>, UserProvider<Client>>();
 //services.AddSingleton<IRepository<Client>, ListRepository<SellContracts>>();
 
 services.AddSingleton<DbContext, SmartAgencyAppDbContext>();
@@ -79,7 +78,7 @@ var sqlRepository = new SqlRepository<Client>(new SmartAgencyAppDbContext());
 Console.WriteLine(sqlRepository.ToString());
 
 
-var localisation1 = new Localisation(LocalisationDistrict.Ursynow, "Pulawska", 270, 73);
+var localisation1 = new Localisation(LocalisationDistrict.Ursynow, "Slawska", 70, 3);
 
 var stringLocalisation1 = localisation1.ToString();
 var arrayLocalisation1 = stringLocalisation1.Split(',');

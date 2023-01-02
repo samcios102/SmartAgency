@@ -8,11 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Data\Repositories\Extensions\" />
-		<Folder Include="Resources\Files\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <PackageReference Include="D20Tek.Spectre.Console.Extensions" Version="1.0.8" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.1" />
@@ -22,7 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Resources\Files\ClientExample.csv">
+	  <None Update="1_DataAccess\Resources\Files\ClientExample.csv">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>

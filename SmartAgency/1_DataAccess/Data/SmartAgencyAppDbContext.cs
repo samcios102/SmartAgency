@@ -11,7 +11,7 @@ namespace SmartAgency.Data;
 
 public class SmartAgencyAppDbContext : DbContext
 {
-    //public DbSet<Client> Clients => Set<Client>();
+    //public DbSet<User> Clients => Set<User>();
     //public DbSet<Agent> Agents => Set<Agent>();
     //public DbSet<SellContract> SellContracts => Set<SellContract>();
     public DbSet<Property> Properties => Set<Property>();

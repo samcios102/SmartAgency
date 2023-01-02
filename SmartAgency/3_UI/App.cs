@@ -16,13 +16,13 @@ public class App : IApp
     private readonly IRepository<Property> _propertyRepository;
     private readonly IRepository<Client> _clientRepository;
     private readonly ICsvReader _csvReader;
-    private readonly IClientProvider _clientProvider;
+    private readonly IUserProvider<Client> _clientProvider;
 
     public App(
         IRepository<Property> propertyRepository,
         IRepository<Client> clientRepository,
         ICsvReader csvReader,
-        IClientProvider clientProvider
+        IUserProvider<Client> clientProvider
         )
     {
         _propertyRepository = propertyRepository;
@@ -67,15 +67,15 @@ public class App : IApp
 
 
 
-        //_clientProvider.SearchClients("a22eff26-2098-4949-88c8-6db38a7125fa");
-        _clientProvider.SearchClients("1997-4-15");
+        //_clientProvider.Search("a22eff26-2098-4949-88c8-6db38a7125fa");
+        var search = _clientProvider.Search("1997-4-15");
 
-        var sortedClients = _clientProvider.SortClientByDateAdded(false);
+        var sortedClients = _clientProvider.SortByDateAdded(false);
 
-        var filteredClients = _clientProvider.FilterClientsAddedAfterDate(DateOnly.Parse("1996-12-12"));
+        var filteredClients = _clientProvider.FilterAddedAfterDate(DateOnly.Parse("1996-12-12"));
 
 
-        var searchedClient = _clientProvider.SearchClients("Myriam");
+        var searchedClient = _clientProvider.Search("Myriam");
 
         var basicColumnClients = _clientProvider.ShowBasicColumn();
 
