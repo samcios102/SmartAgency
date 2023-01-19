@@ -1,9 +1,10 @@
 ﻿using SmartAgency._1_DataAccess.Data.Entities.UserEntity;
 using SmartAgency._1_DataAccess.Data.Repositories;
+using Spectre.Console;
 
 namespace SmartAgency._2_ApplicationServices.Components.DataProviders
 {
-    public class UserProvider<TUser> : IUserProvider<TUser> where TUser : User, new()
+    public class UserProvider<TUser> : IUserProvider<TUser> where TUser : UserBase, new()
     {
         private readonly IRepository<TUser> _userRepository;
 
@@ -23,10 +24,9 @@ namespace SmartAgency._2_ApplicationServices.Components.DataProviders
                     x.Id.Equals(newGuid) ||
                     x.FirstName.Value.Equals(searchValue, StringComparison.InvariantCultureIgnoreCase) || 
                     x.LastName.Value.Equals(searchValue, StringComparison.InvariantCultureIgnoreCase) ||
-                    x.Email.Value.Equals(searchValue, StringComparison.InvariantCultureIgnoreCase) ||
-                    x.DateAdded.Equals(newDateOnly)
+                    x.Email.Value.Equals(searchValue, StringComparison.InvariantCultureIgnoreCase) //||
+                    //x.DateAdded.Equals(newDateOnly)
                     );
-
 
             return users.ToList();
         }
@@ -47,8 +47,6 @@ namespace SmartAgency._2_ApplicationServices.Components.DataProviders
                     .ThenBy(x => x.LastName.Value)
                     .ToList();
             }
-                
-            
         }
 
         public List<TUser> FilterAddedAfterDate(DateOnly date)
@@ -64,6 +62,7 @@ namespace SmartAgency._2_ApplicationServices.Components.DataProviders
         public List<TUser> ShowBasicColumn()
         {
             var users = _userRepository.GetAll()
+                .OrderBy(x => x.DateAdded)
                 .Select(x => new TUser
                 {
                     FirstName = x.FirstName,
@@ -73,20 +72,5 @@ namespace SmartAgency._2_ApplicationServices.Components.DataProviders
             return users.ToList();
         }
 
-        public List<TUser> ShowPage(int pageNr)
-        {
-            var users = _userRepository.GetAll()
-                .OrderByDescending(x => x.DateAdded)
-                .Skip((pageNr - 1) * 20)
-                .Take(20);
-
-            if (!users.Any())
-            {
-                throw new ArgumentException("Page not found");
-            }
-
-
-            return users.ToList();
-        }
     }
 }

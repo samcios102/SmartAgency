@@ -2,21 +2,21 @@
 
 namespace SmartAgency._1_DataAccess.Data.Repositories;
 
-public class ListRepository<T> : IRepository<T> where T : class, IEntity
+public class ListRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
 {
-    protected readonly List<T> _itemList = new List<T>();
+    protected readonly List<TEntity> _itemList = new List<TEntity>();
 
-    public T GetById(Guid id)
+    public TEntity GetById(Guid id)
     {
         return _itemList.SingleOrDefault(x => x.Id == id);
     }
 
-    public IEnumerable<T> GetAll()
+    public IEnumerable<TEntity> GetAll()
     {
         return _itemList.ToList();
     }
 
-    public void Add(T entity)
+    public void Add(TEntity entity)
     {
         _itemList.Add(entity);
     }

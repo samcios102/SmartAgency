@@ -2,9 +2,9 @@
 
 namespace SmartAgency._1_DataAccess.Data.Repositories;
 
-public interface IWriteRepository<in T> where T : class, IEntity
+public interface IWriteRepository<in TEntity> where TEntity : class, IEntity
 {
-    void Add(T entity);
+    void Add(TEntity entity);
     void Remove(Guid id);
     void Save();
 

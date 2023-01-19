@@ -1,8 +1,8 @@
-﻿using User = SmartAgency._1_DataAccess.Data.Entities.UserEntity.User;
+﻿using SmartAgency._1_DataAccess.Data.Entities.UserEntity;
 
 namespace SmartAgency._2_ApplicationServices.Components.DataProviders;
 
-public interface IUserProvider<TUser> where TUser : User
+public interface IUserProvider<TUser> where TUser : UserBase
 {
     List<TUser> Search(string searchValue);
 
@@ -12,7 +12,6 @@ public interface IUserProvider<TUser> where TUser : User
 
     List<TUser> ShowBasicColumn();
 
-    List<TUser> ShowPage(int pageNr);
 
 
 }

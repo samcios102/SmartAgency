@@ -6,11 +6,13 @@ namespace SmartAgency._1_DataAccess.Data;
 
 public class SmartAgencyAppDbContext : DbContext
 {
-    //public DbSet<User> Clients => Set<User>();
+    //public DbSet<UserBase> Clients => Set<UserBase>();
     //public DbSet<Agent> Agents => Set<Agent>();
     //public DbSet<SellContract> SellContracts => Set<SellContract>();
     public DbSet<Property> Properties => Set<Property>();
-    public DbSet<Client> Clients => Set<Client>();
+    //public DbSet<Client> Clients => Set<Client>();
+
+    public DbSet<Client> Clients { get; set; }
     //public DbSet<Localisation> Localisations => Set<Localisation>();
 
     ///// public DbSet<Property> Properties { get; set; } /// ms sql
@@ -22,10 +24,21 @@ public class SmartAgencyAppDbContext : DbContext
 
     }*/
 
+    //ms sql
+    public SmartAgencyAppDbContext(DbContextOptions<SmartAgencyAppDbContext> options)
+        : base(options)
+    {
+    }
+
+
+
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        base.OnConfiguring(optionsBuilder);
-        optionsBuilder.UseInMemoryDatabase("StorageAppDb");
+        // in memery db
+
+        //base.OnConfiguring(optionsBuilder);
+        //optionsBuilder.UseInMemoryDatabase("StorageAppDb");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) //ta klasa nie dziedziczy po niczym, wie nie trzeba
@@ -76,20 +89,22 @@ public class SmartAgencyAppDbContext : DbContext
         modelBuilder.Entity<Client>().OwnsOne(x => x.Email);
         modelBuilder.Entity<Client>().OwnsOne(x => x.FirstName);
         modelBuilder.Entity<Client>().OwnsOne(x => x.LastName);
+        //modelBuilder.Entity<Client>().Property(x => x.DateAdded).HasConversion<DateTime>();
+        modelBuilder.Entity<Client>().Ignore(x => x.DateAdded);
 
 
         base.OnModelCreating(modelBuilder);
     }
 
     // nie jest potrzebne wraz z klasa localisation converter
-/*    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
-    {
+    /*    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
 
-        //configurationBuilder.Properties<Localisation>().HaveConversion<LocalisationConverter>();
-               
+            //configurationBuilder.Properties<Localisation>().HaveConversion<LocalisationConverter>();
 
-        base.ConfigureConventions(configurationBuilder);
-    }*/
+
+            base.ConfigureConventions(configurationBuilder);
+        }*/
 
     //// MS SQL
     /*public SmartAgencyAppDbContext(DbContextOptions<SmartAgencyAppDbContext> options)
@@ -97,4 +112,7 @@ public class SmartAgencyAppDbContext : DbContext
     {
 
     }*/
+
+ 
+
 }

@@ -2,7 +2,7 @@
 
 namespace SmartAgency._1_DataAccess.Data.Entities.UserEntity;
 
-public abstract record User : IEntity
+public abstract record UserBase : IEntity
 {
     public Guid Id { get; init; }
     public Name FirstName { get; set; }
@@ -10,7 +10,14 @@ public abstract record User : IEntity
     public Email Email { get; set; }
     public DateOnly DateAdded { get; set; }
 
-    public User(){}
+    public UserBase(){}
+
+    public override string ToString()
+    {
+        return $"{FirstName} {LastName} {Email} {DateAdded}";
+    }
+
+
 
 }
 

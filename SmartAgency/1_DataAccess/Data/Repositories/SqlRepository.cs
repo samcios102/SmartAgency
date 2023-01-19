@@ -3,28 +3,28 @@ using SmartAgency._1_DataAccess.Data.Entities;
 
 namespace SmartAgency._1_DataAccess.Data.Repositories;
 
-public class SqlRepository<T> : IRepository<T> where T : class, IEntity
+public class SqlRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
 {
-    private readonly  DbContext _dbContext;
-    private readonly DbSet<T> _dbSet;
+    private readonly DbContext _dbContext;
+    private readonly DbSet<TEntity> _dbSet;
 
     public SqlRepository(DbContext dbContext)
     {
         _dbContext = dbContext;
-        _dbSet = dbContext.Set<T>();
+        _dbSet = dbContext.Set<TEntity>();
     }
 
-    public T GetById(Guid id)
+    public TEntity GetById(Guid id)
     {
         return _dbSet.Find(id);
     }
 
-    public IEnumerable<T> GetAll()
+    public IEnumerable<TEntity> GetAll()
     {
         return _dbSet.ToList();
     }
 
-    public void Add(T entity)
+    public void Add(TEntity entity)
     {
         _dbSet.Add(entity); 
     }

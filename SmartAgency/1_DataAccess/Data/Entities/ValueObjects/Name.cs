@@ -11,10 +11,12 @@ public class Name
     }*/
     public Name(string value)
     {
-        if (string.IsNullOrEmpty(value))
+        if (string.IsNullOrEmpty(value) )
         {
             throw new ArgumentException("Both users names cannot be empty");
         }
+
+
 
         Value = value;
 

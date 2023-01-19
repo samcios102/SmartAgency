@@ -2,10 +2,10 @@
 
 namespace SmartAgency._1_DataAccess.Data.Repositories;
 
-public interface IReadRepository<out T> where T : class,IEntity
+public interface IReadRepository<out TEntity> where TEntity : class,IEntity
 {
-    T GetById(Guid id);
-    IEnumerable<T> GetAll();
+    TEntity GetById(Guid id);
+    IEnumerable<TEntity> GetAll();
 
 
 }

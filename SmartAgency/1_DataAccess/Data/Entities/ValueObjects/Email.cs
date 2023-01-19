@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Spectre.Console;
 
 namespace SmartAgency._1_DataAccess.Data.Entities.ValueObjects;
 
@@ -20,10 +21,19 @@ public record Email
 
         var isValid = new EmailAddressAttribute().IsValid(value);
 
-        if (isValid is false)
+        if (!isValid)
         {
-            throw new InvalidOperationException("Email is not valid");
+            do
+            {
+                AnsiConsole.MarkupLine("Enter email in valid format");
+
+                value = Console.ReadLine();
+
+                isValid = new EmailAddressAttribute().IsValid(value);
+
+            } while (!isValid);
         }
+        
 
         Value = value;
     }

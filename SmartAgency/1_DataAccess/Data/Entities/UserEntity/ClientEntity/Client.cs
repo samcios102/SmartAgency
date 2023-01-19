@@ -2,7 +2,7 @@
 
 namespace SmartAgency._1_DataAccess.Data.Entities.UserEntity.ClientEntity;
 
-public record Client : User
+public record Client : UserBase
 {
     
     public Client(Guid id, Name firstName, Name lastName, Email email, DateOnly dateAdded)
@@ -19,4 +19,8 @@ public record Client : User
 
     }
 
+    public override string ToString()
+    {
+        return base.ToString();
+    }
 }
