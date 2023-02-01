@@ -1,27 +1,28 @@
-﻿using LamarCodeGeneration.Frames;
-using SmartAgency._1_DataAccess.Data.Entities.UserEntity;
-using SmartAgency._1_DataAccess.Data.Repositories;
+﻿using SmartAgency._1_Core.Data.Entities.UserEntity;
+using SmartAgency._1_Core.Data.Repositories;
+using SmartAgency._2_ApplicationServices.Components.CsvReader;
 using SmartAgency._2_ApplicationServices.Components.DataProviders;
 using SmartAgency._2_ApplicationServices.Components.DataProviders.Extensions;
 using Spectre.Console;
-using System.Net.NetworkInformation;
-using System.Runtime.InteropServices.JavaScript;
 
-namespace SmartAgency._3_UI;
+namespace SmartAgency._3_UI.UserOperations;
 
 public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : UserBase, new()
 {
     private readonly IUserProvider<TUser> _userProvider;
     private readonly IRepository<TUser> _userRepository;
+    private readonly ICsvReader _csvReader;
     private readonly string _type = typeof(TUser).Name;
 
     public UserOperationsBase(
         IUserProvider<TUser> userProvider,
-        IRepository<TUser> userRepository
+        IRepository<TUser> userRepository,
+        ICsvReader csvReader
             )
     {
         _userProvider = userProvider;
         _userRepository = userRepository;
+        _csvReader = csvReader;
     }
 
     public void RenderOperations()
@@ -57,25 +58,27 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
             Email = email,
             DateAdded = DateOnly.FromDateTime(DateTime.Today)
         };
-
+        // raczej pojedynczy try catch
         try
         {
             _userRepository.Add(user);
         }
         catch (Exception e)
         {
-            AnsiConsole.MarkupLine($"There was error while processing {typeof(TUser).Name}insertion \n {e.Message}" );
+            AnsiConsole.MarkupLine($"There was error while processing {typeof(TUser).Name} insertion \n {e.Message}" );
         }
 
-        try
+        /*try
         {
             _userRepository.Save();
-        }
+        } 
         catch (Exception e)
         {
             AnsiConsole.MarkupLine($"There was error while processing {typeof(TUser).Name}save after insertion \n {e.Message}");
 
-        }
+        }*/
+
+        _userRepository.Save();
 
         AnsiConsole.MarkupLine($"[cyan] {_type} {user} successfully added [/]");
         Console.ReadLine();
@@ -182,7 +185,31 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
         
     }
 
+    public void LoadUsersFromCsv()
+    {
+        Console.Clear();
+        AnsiConsole.MarkupLine($"[green] Type file name from 1_Core\\Resources\\Files catalog[/]");
 
+        var fileName = Console.ReadLine();
+
+        if (String.IsNullOrEmpty(fileName))
+        {
+            AnsiConsole.MarkupLine("[red] Query string is empty[/]");
+            return;
+        }
+
+        var usersToAdd = _csvReader.ProcessClients($"1_Core\\Resources\\Files\\" + fileName);
+        var count = 0;
+
+        foreach (var user in usersToAdd)
+        {
+            //_userRepository.Add(user);
+            count++;
+        }
+
+        AnsiConsole.MarkupLine($"Added {count} records");
+        Console.ReadLine();
+    }
     
 
 

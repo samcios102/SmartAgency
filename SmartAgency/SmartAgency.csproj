@@ -17,7 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="1_DataAccess\Resources\Files\ClientExample.csv">
+	  <None Update="1_Core\Resources\Files\ClientExample.csv">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>

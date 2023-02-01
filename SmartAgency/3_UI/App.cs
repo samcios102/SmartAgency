@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using SmartAgency._1_DataAccess.Data;
-using SmartAgency._1_DataAccess.Data.Entities.Enums;
-using SmartAgency._1_DataAccess.Data.Entities.PropertyEntity;
-using SmartAgency._1_DataAccess.Data.Entities.UserEntity.ClientEntity;
-using SmartAgency._1_DataAccess.Data.Entities.ValueObjects;
-using SmartAgency._1_DataAccess.Data.Repositories;
+using SmartAgency._1_Core.Data.Entities.Enums;
+using SmartAgency._1_Core.Data.Entities.PropertyEntity;
+using SmartAgency._1_Core.Data.Entities.UserEntity.ClientEntity;
+using SmartAgency._1_Core.Data.Entities.ValueObjects;
 using SmartAgency._2_ApplicationServices.Components.CsvReader;
 using SmartAgency._2_ApplicationServices.Components.CsvReader.Extensions;
 using SmartAgency._2_ApplicationServices.Components.DataProviders;
+using SmartAgency._3_UI.UserOperations;
 using Spectre.Console;
 
 
@@ -15,36 +14,42 @@ namespace SmartAgency._3_UI;
 
 public class App : IApp
 {
-   
-    private readonly IRepository<Property> _propertyRepository;
-    private readonly IRepository<Client> _clientRepository;
+
+    //private readonly IRepository<Property> _propertyRepository;
+    //private readonly IRepository<Client> _clientRepository;
+    //private readonly IUserProvider<Client> _clientProvider;
+
     private readonly ICsvReader _csvReader;
-    private readonly IUserProvider<Client> _clientProvider;
     private readonly IUserOperations<Client> _clientOperations;
-    private readonly SmartAgencyAppDbContext _dbContext;
+
+    //private readonly SmartAgencyAppDbContext _dbContext; // MS SQL - needed?
 
     public App(
-        IRepository<Property> propertyRepository,
-        IRepository<Client> clientRepository,
+        //IRepository<Property> propertyRepository,
+        //IRepository<Client> clientRepository,
         ICsvReader csvReader,
-        IUserProvider<Client> clientProvider,
-        IUserOperations<Client> clientOperations,
-        SmartAgencyAppDbContext dbContext
+        //IUserProvider<Client> clientProvider,
+        IUserOperations<Client> clientOperations
+        //SmartAgencyAppDbContext dbContext // MS SQL - needed?
         )
     {
-        _propertyRepository = propertyRepository;
-        _clientRepository = clientRepository;
+        //_propertyRepository = propertyRepository;
+        //_clientRepository = clientRepository;
         _csvReader = csvReader;
-        _clientProvider = clientProvider;
+        //_clientProvider = clientProvider;
         _clientOperations = clientOperations;
-        _dbContext = dbContext;
-        dbContext.Database.EnsureCreated();
+        /*_dbContext = dbContext; // MS SQL - needed?
+        dbContext.Database.EnsureCreated();*/ // MS SQL - needed?
     }
 
-        public void Run()
-    {
+    public void Run()
+        {
+            
         
-        Console.WriteLine("Im in Run App");
+
+
+
+
 
         var property1 = new Property(12, new Localisation(LocalisationDistrict.Mokotow, "d", 2, 2), 2, 44, TechnicalCondition.ToGeneralRenovation);
         var property2 = new Property(123, new Localisation(LocalisationDistrict.Wilanow, "Wilanowska", null, null), 2, 50, TechnicalCondition.ToMoveIn);
@@ -57,7 +62,7 @@ public class App : IApp
         var client2 = new Client(Guid.NewGuid(), "Naczi", "Wingorono", "nacz@naczi.pl", DateOnly.FromDateTime(DateTime.Now));
         var client3 = new Client(Guid.NewGuid(), "Bamto", "Kaskada", "Kaszki@d.pl", DateOnly.Parse("1997-4-15"));
 
-        var csvClients = _csvReader.ProcessClients("1_DataAccess\\Resources\\Files\\ClientExample.csv");
+        var csvClients = _csvReader.ProcessClients("1_Core\\Resources\\Files\\ClientExample.csv");
 
         /*foreach (var csvClient in csvClients)
         {
@@ -80,11 +85,13 @@ public class App : IApp
         // operation is sequance of interactions
 
 
-
         var selection = "";
-        
+
+
         do
         {
+            
+
             Console.Clear();
             
             _clientOperations.RenderOperations();
@@ -119,12 +126,7 @@ public class App : IApp
             
         } while (selection is not "7");
 
-
-       
-
-
-
-
+        
 
     }
 }

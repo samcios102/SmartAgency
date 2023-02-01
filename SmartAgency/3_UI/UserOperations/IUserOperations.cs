@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SmartAgency._1_DataAccess.Data.Entities.UserEntity;
+﻿using SmartAgency._1_Core.Data.Entities.UserEntity;
 
-namespace SmartAgency._3_UI
+namespace SmartAgency._3_UI.UserOperations
 {
     public interface IUserOperations<TUser> where TUser : UserBase
     {

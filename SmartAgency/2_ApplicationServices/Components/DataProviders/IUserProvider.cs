@@ -1,4 +1,4 @@
-﻿using SmartAgency._1_DataAccess.Data.Entities.UserEntity;
+﻿using SmartAgency._1_Core.Data.Entities.UserEntity;
 
 namespace SmartAgency._2_ApplicationServices.Components.DataProviders;
 

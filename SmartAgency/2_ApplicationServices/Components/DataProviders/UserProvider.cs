@@ -1,5 +1,5 @@
-﻿using SmartAgency._1_DataAccess.Data.Entities.UserEntity;
-using SmartAgency._1_DataAccess.Data.Repositories;
+﻿using SmartAgency._1_Core.Data.Entities.UserEntity;
+using SmartAgency._1_Core.Data.Repositories;
 using Spectre.Console;
 
 namespace SmartAgency._2_ApplicationServices.Components.DataProviders
