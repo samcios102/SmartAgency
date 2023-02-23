@@ -1,5 +1,4 @@
 ﻿using SmartAgency._1_Core.Data.Entities.UserEntity;
-using SmartAgency._2_ApplicationServices.Components.CsvReader.Extensions;
 using SmartAgency._2_ApplicationServices.Components.CsvReader.Models;
 
 namespace SmartAgency._2_ApplicationServices.Components.CsvReader;
@@ -31,4 +30,5 @@ public class CsvReader<TUser> : ICsvReader<TUser> where TUser : UserBase, new()
                 DateAdded = DateOnly.Parse(columns[4])
             }
         );
+    }
 }

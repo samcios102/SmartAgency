@@ -1,4 +1,5 @@
 ﻿using SmartAgency._1_Core.Data.Entities.UserEntity;
+using SmartAgency._1_Core.Data.Entities.UserEntity.ClientEntity;
 using SmartAgency._1_Core.Data.Repositories;
 using SmartAgency._2_ApplicationServices.Components.CsvReader;
 using SmartAgency._2_ApplicationServices.Components.DataProviders;
@@ -11,13 +12,13 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
 {
     private readonly IUserProvider<TUser> _userProvider;
     private readonly IRepository<TUser> _userRepository;
-    private readonly ICsvReader _csvReader;
+    private readonly ICsvReader<TUser> _csvReader;
     private readonly string _type = typeof(TUser).Name;
 
     public UserOperationsBase(
         IUserProvider<TUser> userProvider,
         IRepository<TUser> userRepository,
-        ICsvReader csvReader
+        ICsvReader<TUser> csvReader
             )
     {
         _userProvider = userProvider;
@@ -37,7 +38,8 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
         table.AddRow("4",$"Show {typeof(TUser).Name} added after specific date");
         table.AddRow("5",$"Add new {typeof(TUser).Name}");
         table.AddRow("6",$"Delete {typeof(TUser).Name}");
-        table.AddRow("7", "[red] Exit [/]");
+        table.AddRow("7", $"Add {_type} from csv file");
+        table.AddRow("8", "[red] Exit [/]");
 
         AnsiConsole.Write(table);
     }
@@ -188,13 +190,13 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
     public void LoadUsersFromCsv()
     {
         Console.Clear();
-        AnsiConsole.MarkupLine($"[green] Type file name from 1_Core\\Resources\\Files catalog[/]");
+        AnsiConsole.MarkupLine($"[green] Type file name from 1_Core\\Resources\\Files catalog in format: <fileName>.csv[/]");
 
         var fileName = Console.ReadLine();
 
         if (String.IsNullOrEmpty(fileName))
         {
-            AnsiConsole.MarkupLine("[red] Query string is empty[/]");
+            AnsiConsole.MarkupLine("[red] File name cannot be empty[/]");
             return;
         }
 
@@ -203,9 +205,11 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
 
         foreach (var user in usersToAdd)
         {
-            //_userRepository.Add(user);
+            _userRepository.Add(user);
             count++;
         }
+
+        _userRepository.Save();
 
         AnsiConsole.MarkupLine($"Added {count} records");
         Console.ReadLine();

@@ -1,8 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using SmartAgency._1_Core.Data.ValueConverters;
 using Spectre.Console;
 
 namespace SmartAgency._1_Core.Data.Entities.ValueObjects;
 
+[TypeConverter(typeof(EmailConverter))]
 public record Email
 {
 
@@ -40,6 +43,11 @@ public record Email
         
 
         Value = value;
+    }
+
+    public Email() // due to seriale xml
+    {
+
     }
 
 

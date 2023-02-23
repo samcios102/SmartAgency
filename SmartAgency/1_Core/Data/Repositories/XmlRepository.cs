@@ -1,11 +1,16 @@
-﻿using System.Xml.Linq;
+﻿using System.ComponentModel;
+using System.Reflection;
+using System.Xml;
+ using System.Xml.Linq;
+using System.Xml.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SmartAgency._1_Core.Data.Entities;
+using SmartAgency._1_Core.Data.Entities.ValueObjects;
 
 namespace SmartAgency._1_Core.Data.Repositories
 {
-    public class XmlRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
+    public class XmlRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
     {
         private static readonly string _type = typeof(TEntity).Name;
         private readonly XDocument _xDocument = LoadOrCreateNewXDocument(); // need to check if null
@@ -36,13 +41,25 @@ namespace SmartAgency._1_Core.Data.Repositories
 
         public IEnumerable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
-
+            
+            return _xDocument.Root.Descendants().Select(element => FromXml(element));
         }
 
         public TEntity GetById(Guid id)
         {
-            throw new NotImplementedException();
+            foreach (var element in _xDocument.Root.Descendants())
+            {
+                //element.
+
+                /*if (FromXml(element).Id) == id)
+                {
+                    return FromXml(element);
+                }*/
+            }
+            throw new ArgumentNullException();
+
+
+
         }
 
         public void Remove(Guid id)
@@ -79,6 +96,33 @@ namespace SmartAgency._1_Core.Data.Repositories
 
             return document;
         }
+
+
+        private static TEntity FromXml(XElement xElement)
+        {
+            var entity = new TEntity();
+            
+            foreach (var xAttribute in xElement.Attributes())
+            {
+                foreach (var propertyInfo in typeof(TEntity).GetProperties())
+                {
+                    if (xAttribute.Name == propertyInfo.Name)
+                    {
+                        var xValue = xAttribute.Value;
+                        var type = propertyInfo.PropertyType;
+                        var converter = TypeDescriptor.GetConverter(type).ConvertFromInvariantString(xValue) ;
+                        
+                        propertyInfo.SetValue(entity, converter);
+
+                    }
+                }
+            }
+
+            return entity;
+        }
+
+        
+
 
     }
 }

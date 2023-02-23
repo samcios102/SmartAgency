@@ -4,7 +4,7 @@ namespace SmartAgency._1_Core.Data.Entities.UserEntity.ClientEntity;
 
 public record Client : UserBase
 {
-    
+
     public Client(Guid id, Name firstName, Name lastName, Email email, DateOnly dateAdded)
     {
         Id = id;

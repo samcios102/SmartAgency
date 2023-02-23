@@ -1,6 +1,10 @@
-﻿namespace SmartAgency._1_Core.Data.Entities.ValueObjects;
+﻿
+using SmartAgency._1_Core.Data.ValueConverters;
+using System.ComponentModel;
 
+namespace SmartAgency._1_Core.Data.Entities.ValueObjects;
 
+[TypeConverter(typeof(NameConverter))]
 public class Name
 {
     public string Value { get; set; } // powinno być immutable
@@ -20,6 +24,11 @@ public class Name
 
         Value = value;
 
+
+    }
+
+    public Name() // due to serialize 
+    {
 
     }
 

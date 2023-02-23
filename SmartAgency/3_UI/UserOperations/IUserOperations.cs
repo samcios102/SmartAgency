@@ -17,6 +17,8 @@ namespace SmartAgency._3_UI.UserOperations
 
         void DeleteUser();
 
+        void LoadUsersFromCsv();
+
 
 
 

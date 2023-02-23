@@ -1,4 +1,6 @@
-﻿using SmartAgency._1_Core.Data.Entities.ValueObjects;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using SmartAgency._1_Core.Data.Entities.ValueObjects;
 
 namespace SmartAgency._1_Core.Data.Entities.UserEntity;
 
@@ -8,6 +10,7 @@ public abstract record UserBase : IEntity
     public Name FirstName { get; set; }
     public Name LastName { get; set; }
     public Email Email { get; set; }
+    [Required]
     public DateOnly DateAdded { get; set; }
 
     public UserBase(){}

@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel;
+using Microsoft.EntityFrameworkCore;
 using SmartAgency._1_Core.Data.Entities.PropertyEntity;
 using SmartAgency._1_Core.Data.Entities.UserEntity.ClientEntity;
+using DateOnlyConverter = SmartAgency._1_Core.Data.Converters.DateOnlyConverter;
 
 namespace SmartAgency._1_Core.Data;
 
@@ -30,6 +32,13 @@ public class SmartAgencyAppDbContext : DbContext
     {
     }
 
+    /*protected override void ConfigureConventions(ModelConfigurationBuilder builder)
+    {
+        builder.Properties<DateOnly>()
+            .HaveConversion<DateOnlyConverter, DateOnlyComparer>()
+            .HaveColumnType("date");
+
+    }*/
 
 
 
@@ -85,12 +94,40 @@ public class SmartAgencyAppDbContext : DbContext
         /// dziala jesli ten dolny sie usunie, bo jak sa dwa na raz to cos sie pierdoli, ale to naprawiaja podobno
         /*modelBuilder.Entity<Property>().OwnsOne(x => x.Localisation);*/
 
+
+
+        //modelBuilder
+        //    .HasAnnotation("ProductVersion", "7.0.0")
+        //    .HasAnnotation("Relational:MaxIdentifierLenght", 128);
+
+        //SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+        modelBuilder.Entity("SmartAgency._1_Core.Data.Entities.UserEntity.ClientEntity.Client", x =>
+        {
+            x.Property<DateOnly>("DateAdded")
+            .HasConversion<DateOnlyConverter>();
+            //.HasColumnType("datetime2");
+
+            x.ToTable("Clients");
+        });
+            //.Property(x => x.DateAdded);
+            //.HasColumnType("date")
+            //.HasColumnName("DateAddedd");
+            //.HasAnnotation()
+            //.HasConversion<DateOnlyConverter, DateOnlyComparer>()
+            //.ValueGeneratedOnAddOrUpdate();
+            
+            
+            
+
+
         modelBuilder.Entity<Property>().OwnsOne(x => x.Localisation);
         modelBuilder.Entity<Client>().OwnsOne(x => x.Email);
         modelBuilder.Entity<Client>().OwnsOne(x => x.FirstName);
         modelBuilder.Entity<Client>().OwnsOne(x => x.LastName);
+        
         //modelBuilder.Entity<Client>().Property(x => x.DateAdded).HasConversion<DateTime>();
-        modelBuilder.Entity<Client>().Ignore(x => x.DateAdded);
+        //modelBuilder.Entity<Client>().Ignore(x => x.DateAdded);
 
 
         base.OnModelCreating(modelBuilder);
