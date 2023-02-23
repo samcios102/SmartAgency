@@ -1,5 +1,5 @@
 ﻿namespace SmartAgency.Components.CsvReader.Models;
 
-internal class Property
+internal class PropertyCSV
 {
 }
