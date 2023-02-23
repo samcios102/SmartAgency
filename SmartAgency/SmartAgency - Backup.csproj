@@ -8,27 +8,21 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="D20Tek.Spectre.Console.Extensions" Version="1.0.8" />
-	  <PackageReference Include="ErikEJ.EntityFrameworkCore.SqlServer.DateOnlyTimeOnly" Version="7.0.1" />
+		<Folder Include="Data\Repositories\Extensions\" />
+		<Folder Include="Resources\Files\" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.1" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.1" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.1">
-	    <PrivateAssets>all</PrivateAssets>
-	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-	  </PackageReference>
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="1_Core\Resources\Files\ClientExample.csv">
+	  <None Update="Resources\Files\ClientExample.csv">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="3_UI\PropertyOperations\" />
 	</ItemGroup>
 
 </Project>
