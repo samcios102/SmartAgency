@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartAgency._3_UI
 {
-    internal class OperationBase
+    public class AppInMemory
     {
     }
 }

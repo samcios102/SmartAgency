@@ -25,12 +25,14 @@ namespace SmartAgency._2_ApplicationServices
 
         private void ClientRepositoryOnEntityAdded(object? entity, Client client)
         {
-            AnsiConsole.MarkupLine($"[green] Client {client.FirstName} {client.LastName} succesfully added [/]");
+            AnsiConsole.MarkupLine($"[green] Client {client.FirstName} {client.LastName} succesfully added to {entity.GetType().Name} [/]");
+            Console.ReadLine();
         }
 
         private void ClientRepositoryOnEntityRemoved (object? entity, Client client)
         {
-            AnsiConsole.MarkupLine($"[green] Client {client.FirstName} {client.LastName} succesfully removed [/]");
+            AnsiConsole.MarkupLine($"[green] Client {client.FirstName} {client.LastName} succesfully removed from {entity.GetType().Name} [/]");
+            Console.ReadLine();
         }
     }
 }

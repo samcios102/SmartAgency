@@ -8,25 +8,26 @@ using Spectre.Console;
 
 namespace SmartAgency._3_UI.UserOperations;
 
-public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : UserBase, new()
+public abstract class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : UserBase, new()
 {
     private readonly IUserProvider<TUser> _userProvider;
     private readonly IRepository<TUser> _userRepository;
     private readonly ICsvReader<TUser> _csvReader;
     private readonly string _type = typeof(TUser).Name;
 
-    public UserOperationsBase(
+    public UserOperationsBase
+        (
         IUserProvider<TUser> userProvider,
         IRepository<TUser> userRepository,
         ICsvReader<TUser> csvReader
-            )
+        )
     {
         _userProvider = userProvider;
         _userRepository = userRepository;
         _csvReader = csvReader;
     }
 
-    public void RenderOperations()
+    public virtual void RenderOperations()
     {
         var table = new Table();
 
@@ -45,7 +46,7 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
     }
 
 
-    public void AddUser()
+    public virtual void AddUser()
     {
 
         var firstName = GetUserInput("first name");
@@ -81,12 +82,9 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
         }*/
 
         _userRepository.Save();
-
-        Console.ReadLine();
-
     }
 
-    public void DeleteUser()
+    public virtual void DeleteUser()
     {
         Console.Clear();
 
@@ -110,7 +108,7 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
     }
 
 
-    public void SortByDateAdded()
+    public virtual void SortByDateAdded()
     {
         Console.Clear();
 
@@ -123,7 +121,7 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
     }
 
 
-    public void FilterAddedAfterDate()
+    public virtual void FilterAddedAfterDate()
     {
         Console.Clear();
         AnsiConsole.MarkupLine($"[blue] Enter date after clients were added in format dd-mm-yyyy [/]");
@@ -153,7 +151,7 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
 
 
 
-    public void ShowUsers()
+    public virtual void ShowUsers()
     {
         Console.Clear();
 
@@ -165,7 +163,7 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
     }
 
 
-    public void SearchUsers()
+    public virtual void SearchUsers()
     {
      
         Console.Clear();
@@ -186,7 +184,7 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
         
     }
 
-    public void LoadUsersFromCsv()
+    public virtual void LoadUsersFromCsv()
     {
         Console.Clear();
         AnsiConsole.MarkupLine($"[green] Type file name from 1_Core\\Resources\\Files catalog in format: <fileName>.csv[/]");
@@ -319,8 +317,6 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
         Console.Clear();
         AnsiConsole.MarkupLine($"[green] Type user {type} [/]");
         return Console.ReadLine();
-
-
     }
 
 
