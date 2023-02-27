@@ -82,7 +82,6 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
 
         _userRepository.Save();
 
-        AnsiConsole.MarkupLine($"[cyan] {_type} {user} successfully added [/]");
         Console.ReadLine();
 
     }

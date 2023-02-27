@@ -12,11 +12,12 @@ namespace SmartAgency._1_Core.Data.Repositories
 {
     public class XmlRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
     {
-        private static readonly string _type = typeof(TEntity).Name;
+        
         private readonly XDocument _xDocument = LoadOrCreateNewXDocument(); // need to check if null
+        private static readonly string _type = typeof(TEntity).Name;
 
-
- 
+        public event EventHandler<TEntity>? EntityAdded;
+        public event EventHandler<TEntity>? EntityDeleted;
         public void Add(TEntity entity)
         {
             var element = new XElement($"{_type}");
@@ -29,6 +30,7 @@ namespace SmartAgency._1_Core.Data.Repositories
             }
 
             _xDocument.Root.AddFirst(element);
+            EntityAdded?.Invoke(this, entity);
 
             /*node.Add(new XElement($"{_type}"),
                 from property in properties
@@ -47,24 +49,20 @@ namespace SmartAgency._1_Core.Data.Repositories
 
         public TEntity GetById(Guid id)
         {
-            foreach (var element in _xDocument.Root.Descendants())
-            {
-                //element.
+            var entities = this.GetAll();
 
-                /*if (FromXml(element).Id) == id)
-                {
-                    return FromXml(element);
-                }*/
-            }
-            throw new ArgumentNullException();
-
-
+            return entities.Where(x => x.Id == id).FirstOrDefault();
+                  
 
         }
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = GetById(id);
+            
+            _xDocument.Root.Descendants().Where(node => (string) node.Attribute("Id") == id.ToString()).Remove();
+
+            EntityDeleted?.Invoke(this, entity);
         }
 
         public void Save()

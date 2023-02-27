@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using SmartAgency._1_Core.Data;
 using SmartAgency._1_Core.Data.Entities.Enums;
 using SmartAgency._1_Core.Data.Entities.PropertyEntity;
 using SmartAgency._1_Core.Data.Entities.UserEntity.ClientEntity;
 using SmartAgency._1_Core.Data.Entities.ValueObjects;
+using SmartAgency._2_ApplicationServices;
 using SmartAgency._2_ApplicationServices.Components.CsvReader;
 using SmartAgency._2_ApplicationServices.Components.DataProviders;
 using SmartAgency._3_UI.UserOperations;
@@ -18,31 +20,33 @@ public class App : IApp
     //private readonly IRepository<Client> _clientRepository;
     //private readonly IUserProvider<Client> _clientProvider;
 
-    private readonly ICsvReader<Client> _csvClientReader;
+    //private readonly ICsvReader<Client> _csvClientReader;
     private readonly IUserOperations<Client> _clientOperations;
-
-    //private readonly SmartAgencyAppDbContext _dbContext; // MS SQL - needed?
+    private readonly IEventHandlerService _eventHandler;
+    private readonly SmartAgencyAppDbContext _dbContext; // MS SQL - needed?
 
     public App(
         //IRepository<Property> propertyRepository,
         //IRepository<Client> clientRepository,
         //IUserProvider<Client> clientProvider,
-        IUserOperations<Client> clientOperations
-        //SmartAgencyAppDbContext dbContext // MS SQL - needed?
+        IUserOperations<Client> clientOperations,
+        IEventHandlerService eventHandler,
+        SmartAgencyAppDbContext dbContext // MS SQL - needed?
         )
     {
         //_propertyRepository = propertyRepository;
         //_clientRepository = clientRepository;
         //_clientProvider = clientProvider;
         _clientOperations = clientOperations;
-        /*_dbContext = dbContext; // MS SQL - needed?
-        dbContext.Database.EnsureCreated();*/ // MS SQL - needed?
+        _eventHandler = eventHandler;
+        _dbContext = dbContext; // MS SQL - needed?
+        dbContext.Database.EnsureCreated(); // MS SQL - needed?
     }
 
     public void Run()
     {
-      
 
+        _eventHandler.SubscribeToEvents();
 
 
     //user interaction, handler?
@@ -51,6 +55,9 @@ public class App : IApp
     // operation is sequance of interactions
 
     //_clientOperations.ShowUsers();
+
+        
+
 
     var selection = "";
 

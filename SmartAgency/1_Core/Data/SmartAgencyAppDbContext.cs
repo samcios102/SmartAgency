@@ -11,7 +11,7 @@ public class SmartAgencyAppDbContext : DbContext
     //public DbSet<UserBase> Clients => Set<UserBase>();
     //public DbSet<Agent> Agents => Set<Agent>();
     //public DbSet<SellContract> SellContracts => Set<SellContract>();
-    public DbSet<Property> Properties => Set<Property>();
+    //public DbSet<Property> Properties => Set<Property>();
     //public DbSet<Client> Clients => Set<Client>();
 
     public DbSet<Client> Clients { get; set; }
@@ -121,12 +121,23 @@ public class SmartAgencyAppDbContext : DbContext
             
 
 
-        modelBuilder.Entity<Property>().OwnsOne(x => x.Localisation);
+        //modelBuilder.Entity<Property>().OwnsOne(x => x.Localisation);
+
         modelBuilder.Entity<Client>().OwnsOne(x => x.Email);
         modelBuilder.Entity<Client>().OwnsOne(x => x.FirstName);
         modelBuilder.Entity<Client>().OwnsOne(x => x.LastName);
+        //modelBuilder.Entity<Client>().HasOne(x => x.DateAdded);
+
+
+        modelBuilder.Entity<Client>().Property(x => x.DateAdded).HasConversion<DateTime>();
+
+        modelBuilder.Entity<Client>(builder =>
+        {
+            builder.Property(x => x.DateAdded)
+                .HasConversion<DateOnlyConverter, DateOnlyComparer>();
+        });
         
-        //modelBuilder.Entity<Client>().Property(x => x.DateAdded).HasConversion<DateTime>();
+        
         //modelBuilder.Entity<Client>().Ignore(x => x.DateAdded);
 
 

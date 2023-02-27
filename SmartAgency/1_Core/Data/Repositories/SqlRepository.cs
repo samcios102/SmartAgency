@@ -12,7 +12,11 @@ public class SqlRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         _dbContext = dbContext;
         _dbSet = dbContext.Set<TEntity>();
+
     }
+
+    public event EventHandler<TEntity>? EntityAdded;
+    public event EventHandler<TEntity>? EntityDeleted;
 
     public TEntity GetById(Guid id)
     {
@@ -26,16 +30,18 @@ public class SqlRepository<TEntity> : IRepository<TEntity> where TEntity : class
 
     public void Add(TEntity entity)
     {
-        _dbSet.Add(entity); 
+        _dbSet.Add(entity);
+        EntityAdded?.Invoke(this, entity);
     }
 
     public void Remove(Guid id)
     {
-        foreach (var item in _dbSet)
+        foreach (var entity in _dbSet)
         {
-            if (item.Id == id)
+            if (entity.Id == id)
             {
-                _dbSet.Remove(item);
+                _dbSet.Remove(entity);
+                EntityDeleted?.Invoke(this, entity);
             }
         }
     }
