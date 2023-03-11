@@ -33,11 +33,9 @@ namespace SmartAgency._3_UI
 
         public void Run()
         {
-
             _eventHandlerService.SubscribeToEvents();
             _clientInteractions.ChooseActions();
 
- 
         }
     }
 }

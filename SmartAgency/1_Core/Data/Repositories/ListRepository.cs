@@ -23,29 +23,7 @@ public class ListRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     {
         _itemList.Add(entity);
     }
-
-    /*public void Update(Guid id, T entity)
-    {
-
-        //var index = _itemList.FindIndex(x => x.Id == id);
-
-
-        T newObject = (T)Activator.CreateInstance(
-            entity.GetType(), new object(
-                foreach (var prop in typeof(T).GetProperties())
-                {
-                    prop.GetValue(entity);
-                }));
-
-                foreach (var entityProperty in entity.GetType().GetProperties())
-        {
-            Console.WriteLine(entityProperty);
-        }
-
-        //Console.WriteLine($"Updated {id} with {updatedObj.ToString()}\n");
-    }*/
-    
-    
+  
     public void Remove(Guid id)
     {
         var entity = _itemList.FirstOrDefault(x => x.Id == id);

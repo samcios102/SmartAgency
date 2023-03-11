@@ -27,8 +27,4 @@
 	  </None>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="3_UI\Operations\Property\" />
-	</ItemGroup>
-
 </Project>

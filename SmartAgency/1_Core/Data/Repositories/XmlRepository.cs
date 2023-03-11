@@ -33,12 +33,6 @@ namespace SmartAgency._1_Core.Data.Repositories
             _xDocument.Root.AddFirst(element);
             EntityAdded?.Invoke(this, entity);
 
-            /*node.Add(new XElement($"{_type}"),
-                from property in properties
-                select (new XAttribute(property.Name, property.GetValue(entity)))
-            );*/
-
-
         }
 
 

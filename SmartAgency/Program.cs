@@ -17,7 +17,6 @@ using SmartAgency._3_UI.UserOperations;
 using Spectre.Console;
 
 
-
 var services = new ServiceCollection();
 services.AddSingleton<IRepository<Property>, ListRepository<Property>>();
 services.AddSingleton<ICsvReader<Client>, CsvReader<Client>>();
@@ -25,17 +24,6 @@ services.AddSingleton<IUserProvider<Client>, UserProvider<Client>>();
 services.AddSingleton<IUserOperations<Client>, UserOperationsBase<Client>>();
 services.AddSingleton<IUserInteractions<Client>, UserInteractions<Client>>();
 services.AddSingleton<IEventHandlerService, EventHandlerService>();
-
-
-//servives.Add(services);
-// in run collect pack of services 
-
-// xmlRepository DateOnly 26.02.2023 nie działa
-//operation collecting
-// getById nie jest używane 
-// service collector TO CREATE
-// migrations SQL TO CREATE
-// SQL migration idk 
 
 
 AnsiConsole.MarkupLine($"Choose database: (1) MS SQL, (2) InMemory, (3) Local XML");

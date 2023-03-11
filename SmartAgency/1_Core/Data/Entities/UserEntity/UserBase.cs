@@ -12,8 +12,6 @@ public abstract record UserBase : IEntity
     public Email Email { get; set; }
     public DateOnly DateAdded { get; set; }
 
-    //public Name x { get; set; } // name of class or its class problem //p put another Name type
-
     public UserBase(){}
 
     public override string ToString()
@@ -25,15 +23,3 @@ public abstract record UserBase : IEntity
 
 }
 
-
-
-
-
-//comparer i toString
-
-// copy/ clone
-
-// var user1 = user2 with { FirstName = "Gary}
-
-
-// dont need to serializa and deserialize json ... no more :D

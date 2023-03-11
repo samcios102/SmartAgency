@@ -10,10 +10,6 @@ public class Name
 {
     public string Value { get; set; } // powinno być immutable
 
-/*    public Name()
-    {
-        Value = "";
-    }*/
     public Name(string value)
     {
         if (string.IsNullOrEmpty(value) )

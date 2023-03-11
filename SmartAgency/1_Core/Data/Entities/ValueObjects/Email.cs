@@ -11,22 +11,10 @@ public record Email
 
     public string Value { get; set; }
 
-/*    public Email()
-    {
-        Value = "";
-    }*/
     public Email(string value)
     {
         var isValid = new EmailAddressAttribute().IsValid(value);
-
-        /*if (string.IsNullOrEmpty(value))
-        {
-            isValid = false;
-            //throw new ArgumentNullException("Email cannot be empty");
-        }*/
-
-        //var isValid = new EmailAddressAttribute().IsValid(value);
-
+    
         if (!isValid)
         {
             do
