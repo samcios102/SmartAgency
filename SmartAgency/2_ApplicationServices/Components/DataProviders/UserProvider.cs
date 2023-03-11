@@ -24,8 +24,8 @@ namespace SmartAgency._2_ApplicationServices.Components.DataProviders
                     x.Id.Equals(newGuid) ||
                     x.FirstName.Value.Equals(searchValue, StringComparison.InvariantCultureIgnoreCase) || 
                     x.LastName.Value.Equals(searchValue, StringComparison.InvariantCultureIgnoreCase) ||
-                    x.Email.Value.Equals(searchValue, StringComparison.InvariantCultureIgnoreCase) //||
-                    //x.DateAdded.Equals(newDateOnly)
+                    x.Email.Value.Equals(searchValue, StringComparison.InvariantCultureIgnoreCase) ||
+                    x.DateAdded.Equals(newDateOnly)
                     );
 
             return users.ToList();

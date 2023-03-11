@@ -8,7 +8,7 @@ using Spectre.Console;
 
 namespace SmartAgency._3_UI.UserOperations;
 
-public abstract class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : UserBase, new()
+public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : UserBase, new()
 {
     private readonly IUserProvider<TUser> _userProvider;
     private readonly IRepository<TUser> _userRepository;

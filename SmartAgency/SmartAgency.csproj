@@ -28,7 +28,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="2_ApplicationServices\Services\Operations\Property\" />
+	  <Folder Include="3_UI\Operations\Property\" />
 	</ItemGroup>
 
 </Project>

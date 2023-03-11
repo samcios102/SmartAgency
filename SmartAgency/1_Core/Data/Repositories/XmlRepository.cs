@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Globalization;
 using System.Reflection;
 using System.Xml;
  using System.Xml.Linq;
@@ -108,6 +109,14 @@ namespace SmartAgency._1_Core.Data.Repositories
                     {
                         var xValue = xAttribute.Value;
                         var type = propertyInfo.PropertyType;
+
+                        if (propertyInfo.PropertyType == typeof(DateOnly))
+                        {
+                            string[] components = xValue.Split('.');
+                            xValue = components[1] + "." + components[0] + "." + components[2];
+                                                                      
+                        }
+
                         var converter = TypeDescriptor.GetConverter(type).ConvertFromInvariantString(xValue) ;
                         
                         propertyInfo.SetValue(entity, converter);
@@ -118,9 +127,5 @@ namespace SmartAgency._1_Core.Data.Repositories
 
             return entity;
         }
-
-        
-
-
     }
 }

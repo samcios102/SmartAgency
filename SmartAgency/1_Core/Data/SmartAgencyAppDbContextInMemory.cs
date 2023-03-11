@@ -22,20 +22,24 @@ public class SmartAgencyAppDbContextInMemory : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder) 
     {
         
-        modelBuilder.Entity<Property>().OwnsOne(x => x.Localisation);
+        //modelBuilder.Entity<Property>().OwnsOne(x => x.Localisation);
         modelBuilder.Entity<Client>().OwnsOne(x => x.Email);
         modelBuilder.Entity<Client>().OwnsOne(x => x.FirstName);
         modelBuilder.Entity<Client>().OwnsOne(x => x.LastName);
 
         //modelBuilder.Entity<Client>().Ignore(x => x.DateAdded);
 
-        modelBuilder.Entity<Client>().Property(x => x.DateAdded).HasConversion<DateTime>();
+        //modelBuilder.Entity<Client>().Property(x => x.DateAdded).HasConversion<DateTime>();
 
-        modelBuilder.Entity<Client>(builder =>
-        {
-            builder.Property(x => x.DateAdded)
-                .HasConversion<DateOnlyConverter, DateOnlyComparer>();
-        });
+
+        // dziala xml i tak działa z tym i bez tego
+        modelBuilder.Entity<Client>().Property(x => x.DateAdded).HasConversion<DateOnlyConverter, DateOnlyComparer>();
+
+        //modelBuilder.Entity<Client>(builder =>
+        //{
+        //    builder.Property(x => x.DateAdded)
+        //        .HasConversion<DateOnlyConverter, DateOnlyComparer>();
+        //});
 
         base.OnModelCreating(modelBuilder);
     }

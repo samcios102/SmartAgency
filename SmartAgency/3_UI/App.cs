@@ -49,7 +49,6 @@ public class App : IApp
 
     public void Run()
     {
-
         _eventHandlerService.SubscribeToEvents();
         _clientInteractions.ChooseActions();
 
