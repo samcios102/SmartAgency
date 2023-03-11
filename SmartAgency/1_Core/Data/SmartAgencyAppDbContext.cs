@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using Microsoft.EntityFrameworkCore;
+using SmartAgency._1_Core.Data.Converters;
 using SmartAgency._1_Core.Data.Entities.PropertyEntity;
 using SmartAgency._1_Core.Data.Entities.UserEntity.ClientEntity;
 using DateOnlyConverter = SmartAgency._1_Core.Data.Converters.DateOnlyConverter;
@@ -11,7 +12,7 @@ public class SmartAgencyAppDbContext : DbContext
     //public DbSet<UserBase> Clients => Set<UserBase>();
     //public DbSet<Agent> Agents => Set<Agent>();
     //public DbSet<SellContract> SellContracts => Set<SellContract>();
-    public DbSet<Property> Properties => Set<Property>();
+    //public DbSet<Property> Properties => Set<Property>();
     //public DbSet<Client> Clients => Set<Client>();
 
     public DbSet<Client> Clients { get; set; }
@@ -50,7 +51,7 @@ public class SmartAgencyAppDbContext : DbContext
         //optionsBuilder.UseInMemoryDatabase("StorageAppDb");
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder) //ta klasa nie dziedziczy po niczym, wie nie trzeba
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         //modelBuilder.Entity<Property>();
 
@@ -96,38 +97,32 @@ public class SmartAgencyAppDbContext : DbContext
 
 
 
-        //modelBuilder
-        //    .HasAnnotation("ProductVersion", "7.0.0")
-        //    .HasAnnotation("Relational:MaxIdentifierLenght", 128);
+    
 
-        //SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+        //modelBuilder.Entity("SmartAgency._1_Core.Data.Entities.UserEntity.ClientEntity.Client", x =>
+        //{
+        //    x.Property<DateOnly>("DateAdded")
+        //    .HasConversion<DateOnlyConverter, DateOnlyComparer>();
+        //    //.HasColumnType("datetime2");
 
-        modelBuilder.Entity("SmartAgency._1_Core.Data.Entities.UserEntity.ClientEntity.Client", x =>
-        {
-            x.Property<DateOnly>("DateAdded")
-            .HasConversion<DateOnlyConverter>();
-            //.HasColumnType("datetime2");
-
-            x.ToTable("Clients");
-        });
-            //.Property(x => x.DateAdded);
-            //.HasColumnType("date")
-            //.HasColumnName("DateAddedd");
-            //.HasAnnotation()
-            //.HasConversion<DateOnlyConverter, DateOnlyComparer>()
-            //.ValueGeneratedOnAddOrUpdate();
-            
-            
-            
+        //    x.ToTable("Clients");
+        //});
 
 
-        modelBuilder.Entity<Property>().OwnsOne(x => x.Localisation);
+        //modelBuilder.Entity<Property>().OwnsOne(x => x.Localisation);
+
         modelBuilder.Entity<Client>().OwnsOne(x => x.Email);
         modelBuilder.Entity<Client>().OwnsOne(x => x.FirstName);
         modelBuilder.Entity<Client>().OwnsOne(x => x.LastName);
-        
-        //modelBuilder.Entity<Client>().Property(x => x.DateAdded).HasConversion<DateTime>();
-        //modelBuilder.Entity<Client>().Ignore(x => x.DateAdded);
+
+
+        modelBuilder.Entity<Client>().Property(x => x.DateAdded).HasConversion<DateOnlyConverter, DateOnlyComparer>();
+
+        //modelBuilder.Entity<Client>(builder =>
+        //{
+        //    builder.Property(x => x.DateAdded)
+        //        .HasConversion<DateOnlyComparer, DateOnlyComparer>();
+        //});
 
 
         base.OnModelCreating(modelBuilder);

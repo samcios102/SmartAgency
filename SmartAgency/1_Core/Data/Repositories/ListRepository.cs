@@ -6,6 +6,9 @@ public class ListRepository<TEntity> : IRepository<TEntity> where TEntity : clas
 {
     protected readonly List<TEntity> _itemList = new List<TEntity>();
 
+    public event EventHandler<TEntity>? EntityAdded;
+    public event EventHandler<TEntity>? EntityDeleted;
+
     public TEntity GetById(Guid id)
     {
         return _itemList.SingleOrDefault(x => x.Id == id);
@@ -45,7 +48,9 @@ public class ListRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     
     public void Remove(Guid id)
     {
-        _itemList.Remove(_itemList.FirstOrDefault(x => x.Id == id));
+        var entity = _itemList.FirstOrDefault(x => x.Id == id);
+        _itemList.Remove(entity);
+        EntityDeleted?.Invoke(this, entity);
     }
 
     public void Save()

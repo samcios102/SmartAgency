@@ -10,8 +10,9 @@ public abstract record UserBase : IEntity
     public Name FirstName { get; set; }
     public Name LastName { get; set; }
     public Email Email { get; set; }
-    [Required]
     public DateOnly DateAdded { get; set; }
+
+    //public Name x { get; set; } // name of class or its class problem //p put another Name type
 
     public UserBase(){}
 

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartAgency._3_UI
+namespace SmartAgency._2_ApplicationServices
 {
-    internal class OperationBase
+    public interface IEventHandlerService
     {
+        void SubscribeToEvents();
     }
 }
