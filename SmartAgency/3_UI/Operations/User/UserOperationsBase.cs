@@ -61,25 +61,8 @@ public class UserOperationsBase<TUser> : IUserOperations<TUser> where TUser : Us
             Email = email,
             DateAdded = DateOnly.FromDateTime(DateTime.Today)
         };
-        // raczej pojedynczy try catch
-        try
-        {
-            _userRepository.Add(user);
-        }
-        catch (Exception e)
-        {
-            AnsiConsole.MarkupLine($"There was error while processing {typeof(TUser).Name} insertion \n {e.Message}" );
-        }
 
-        /*try
-        {
-            _userRepository.Save();
-        } 
-        catch (Exception e)
-        {
-            AnsiConsole.MarkupLine($"There was error while processing {typeof(TUser).Name}save after insertion \n {e.Message}");
-
-        }*/
+        _userRepository.Add(user);
 
         _userRepository.Save();
     }
